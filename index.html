@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script type="text/babel" src="js/joke.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>MSI 2020</title>
+</head>
+<body>
+<div class="filtersBlock">
+    <div class="name">MSI 2020</div>
+    <p class="mainHeaderText">Hey!</p>
+    <p class="headerText">Let`s try to find a joke for you:</p>
+
+    <input type="radio" id="random" name="mode" value="random" class="radioB" onclick="selectMode()">
+    <label for="random" class="radio text">Random</label>
+
+    <br>
+    <input type="radio" id="category" name="mode" value="phone" class="radioB" onclick="selectMode()">
+    <label for="category" class="radio text">From category</label>
+    <div id="categories">
+
+    </div>
+    <input type="radio" id="search" name="mode" value="search" class="radioB" onclick="selectMode()">
+    <label for="search" class="radio text">Search</label>
+    <textarea id="searchInput" placeholder="Free text search..."></textarea>
+    <div class = "btn" onclick="getRandomJoke()" ><p class="btnText">Get a joke</p></div>
+</div>
+<div id="jokes">
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+</body>
+</html>
