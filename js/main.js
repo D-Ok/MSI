@@ -1,9 +1,54 @@
 let xhr = new XMLHttpRequest();
 let link = 'https://api.chucknorris.io/jokes/';
 
-function getRandomJoke(){
+function getJoke(){
+    let url = link;
+    if(document.getElementById("random").checked) {
+        url += "random";
+        getJokeFromAPI(url);
+    } else if(document.getElementById("category").checked) {
+        let selectedCategory = document.getElementsByClassName("selectedBox");
+        if(selectedCategory.length>0) {
+            url += "random?category=" + selectedCategory[0].innerHTML;
+            getJokeFromAPI(url);
+        } else
+            alert("Please, choose the category first");
+    } else {
+        let text = document.getElementById("searchInput").value;
+        if(text.length<3 || text.length>120)
+            alert("Length of text for searching must be between 3 and 120.");
+        else {
+            url += 'search?query=' + text;
+            getJokes(url);
+        }
+    }
 
-    xhr.open('GET', link+'random', false);
+}
+
+function getJokes(url) {
+    xhr.open('GET', url, false);
+    xhr.send();
+
+    if (xhr.status != 200) {
+        alert( xhr.status + ': ' + xhr.statusText );
+    } else {
+        let data = JSON.parse(xhr.response).result;
+        console.log(data);
+
+        for(let i =0; i<data.length; i++){
+            let container = document.createElement("div");
+            container.id = data[i].id;
+            let parent = document.getElementById("jokes");
+            parent.insertBefore(container, parent.childNodes[0]);
+
+            showJoke(data[i]);
+        }
+
+    }
+}
+
+function getJokeFromAPI(url) {
+    xhr.open('GET', url, false);
     xhr.send();
 
     if (xhr.status != 200) {
@@ -14,7 +59,8 @@ function getRandomJoke(){
 
         let container = document.createElement("div");
         container.id = data.id;
-        document.getElementById("jokes").appendChild(container);
+        let parent = document.getElementById("jokes");
+        parent.insertBefore(container, parent.childNodes[0]);
 
         showJoke(data);
     }
@@ -33,32 +79,6 @@ function getCategories(){
         for(let i =0; i<data.length; i++){
             addCategory(data[i]);
         }
-    }
-}
-
-function getJokeByCategory(){
-    let name;
-    xhr.open('GET', link+'random?category='+name, false);
-    xhr.send();
-
-    if (xhr.status != 200) {
-        alert( xhr.status + ': ' + xhr.statusText );
-    } else {
-        let data = JSON.parse(xhr.response);
-        console.log(data);
-    }
-}
-
-function searchJoke(){
-    let text;
-    xhr.open('GET', link+'search?query='+text, false);
-    xhr.send();
-
-    if (xhr.status != 200) {
-        alert( xhr.status + ': ' + xhr.statusText );
-    } else {
-        let data = JSON.parse(xhr.response);
-        console.log(data);
     }
 }
 
@@ -84,8 +104,28 @@ function selectCategory(el){
     }
 }
 
+function selectMode(el){
+    let categoryEl = document.getElementById("categories");
+    let searchEl = document.getElementById("searchDiv");
+    console.log(el.id);
+    if(el.checked){
+       if(el.id==="search"){
+           searchEl.removeAttribute("hidden");
+           categoryEl.setAttribute("hidden", "");
+       }  else if(el.id === "category"){
+           searchEl.setAttribute("hidden", "");
+           categoryEl.removeAttribute("hidden");
+       } else {
+           searchEl.setAttribute("hidden", "");
+           categoryEl.setAttribute("hidden", "");
+       }
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     getCategories();
+    document.getElementById("random").se
 }, false);
 
 

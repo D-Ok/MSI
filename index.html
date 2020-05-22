@@ -13,27 +13,39 @@
     <title>MSI 2020</title>
 </head>
 <body>
-<div class="filtersBlock">
-    <div class="name">MSI 2020</div>
-    <p class="mainHeaderText">Hey!</p>
-    <p class="headerText">Let`s try to find a joke for you:</p>
+<div class="content">
+    <div class="mainBlock">
+        <div class="filtersBlock">
 
-    <input type="radio" id="random" name="mode" value="random" class="radioB" onclick="selectMode()">
-    <label for="random" class="radio text">Random</label>
+            <div class="name">MSI 2020</div>
+            <p class="mainHeaderText">Hey!</p>
+            <p class="headerText">Let`s try to find a joke for you:</p>
 
-    <br>
-    <input type="radio" id="category" name="mode" value="phone" class="radioB" onclick="selectMode()">
-    <label for="category" class="radio text">From category</label>
-    <div id="categories">
+            <input type="radio" checked id="random" name="mode" value="random" class="radioB" onclick="selectMode(this)">
+            <label for="random" class="radio text">Random</label>
 
+            <br>
+            <input type="radio" id="category" name="mode" value="category" class="radioB" onclick="selectMode(this)">
+            <label for="category" class="radio text">From category <br></label>
+            <div id="categories" hidden>
+
+            </div>
+            <input type="radio" id="search" name="mode" value="search" class="radioB" onclick="selectMode(this)">
+            <label for="search" class="radio text ">Search</label>
+            <div id="searchDiv" hidden>
+            <textarea id="searchInput" placeholder="Free text search..."></textarea>
+            </div>
+            <div class = "btn" onclick="getJoke()" ><p class="btnText">Get a joke</p></div>
+        </div>
+        <div id="jokes">
+        </div>
     </div>
-    <input type="radio" id="search" name="mode" value="search" class="radioB" onclick="selectMode()">
-    <label for="search" class="radio text">Search</label>
-    <textarea id="searchInput" placeholder="Free text search..."></textarea>
-    <div class = "btn" onclick="getRandomJoke()" ><p class="btnText">Get a joke</p></div>
-</div>
-<div id="jokes">
+    <div class="favBlock">
+        <label class="favName">Favourite</label>
+        <div id="favJokes">
 
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -1,15 +1,41 @@
-p{
+body, p, div{
     margin: 0;
 }
 
-.filtersBlock{
-    margin: 0;
-    margin-left: 140px;
+body{
+    background: #F8F8F8;
 }
 
 #jokes{
-    margin-left: 140px;
+    margin: 40px 0;
 }
+
+.mainBlock{
+    padding: 0 10%;
+    display: inline-block;
+    float: left;
+    width: 46%;
+    min-height: 100vh;
+    background: #FFFFFF;
+}
+
+.favBlock {
+    padding: 40px;
+    display: inline-block;
+    float: left;
+    width: calc(34% - 80px);
+}
+
+.favName {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+
+    color: #ABABAB;
+}
+
 
 .name{
     margin-top: 40px;
@@ -79,7 +105,6 @@ p{
     /* Rectangle 2 */
 
     position: relative;
-    width: 680px;
     height: max-content;
 
     padding: 40px 40px 45px 100px;
@@ -88,6 +113,21 @@ p{
 
     background: #F8F8F8;
     border-radius: 20px;
+}
+
+.favJokeDetails{
+    /* Rectangle 2 */
+
+    position: relative;
+    height: max-content;
+
+    padding: 20px 20px 20px 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .jokeIcon{
@@ -110,6 +150,12 @@ p{
     background: #FFFFFF;
 }
 
+.favIcon {
+    top: 47px !important;
+    left: 20px !important;
+    background: #F8F8F8 !important;
+}
+
 .text{
 
     font-family: Roboto;
@@ -124,9 +170,7 @@ p{
 
 .jokeID{
 
-    width: 145px;
-    height: 14px;
-    margin-top: 17px;
+    margin-top: 27px;
     margin-bottom: 5px;
 
     font-family: Roboto;
@@ -141,29 +185,32 @@ p{
 
 .jokeCategory{
 
-    margin-top: 17px;
-    width: 67px;
-    height: 12px;
-    float: left;
+    padding: 6px 20px;
+    float: right;
+    display: inline-block;
+    margin-top: 23px;
 
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     font-size: 10px;
-    line-height: 14px;
+    line-height: 12px;
     /* or 140% */
 
     letter-spacing: 2px;
     text-transform: uppercase;
 
     color: #333333;
+
+    background: #FFFFFF;
+    border-radius: 6px;
 }
 
 .jokeTime{
 
-    width: 128px;
     height: 14px;
     margin-top: 28px;
+    display: inline-block;
 
     font-family: Roboto;
     font-style: normal;
@@ -231,7 +278,7 @@ p{
     margin-top: 20px;
     padding: 8px 15px;
     height: 42px;
-    width: 90%;
+    width: 100%;
 
 
     display: block;
