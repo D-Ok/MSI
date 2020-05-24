@@ -3,43 +3,46 @@ class Joke extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFavourite: false
+            isFavourite: document.getElementById("fav-"+props.joke.id) != undefined
         };
         this.like = this.like.bind(this);
     }
 
     like() {
         let jokeId = this.props.joke.id;
-        let el = document.getElementById(jokeId).getElementsByClassName("favBtn")[0];
+        let jokeEl = document.getElementById(jokeId);
+        let el;
 
-        if(this.props.fav)
-            el.click();
-        else {
-            this.state.isFavourite = !this.state.isFavourite;
-            console.log(this.state.isFavourite);
+        if ( jokeEl != undefined) {
+            el = jokeEl.getElementsByClassName("favBtn")[0];
+            if (this.props.fav)
+                el.click();
+            else {
+                el = jokeEl.getElementsByClassName("favBtn")[0];
 
-            if (this.state.isFavourite) {
-                if (el !== undefined) el.childNodes[0].src = "images/full-heart.png";
+                this.state.isFavourite = !this.state.isFavourite;
+                console.log(this.state.isFavourite);
 
-                let containerF = document.createElement("div");
-                containerF.id = "fav-" + jokeId;
-                let parentF = document.getElementById("favJokes");
-                parentF.insertBefore(containerF, parentF.childNodes[0]);
-
-                showFavJoke(this.props.joke);
-
-            } else {
-                if (el !== undefined) el.childNodes[0].src = "images/heart.png";
-                document.getElementById("fav-" + jokeId).remove();
+                if (this.state.isFavourite) {
+                    if (el !== undefined) el.childNodes[0].src = "images/full-heart.png";
+                    addFavJoke(this.props.joke);
+                } else {
+                    if (el !== undefined) el.childNodes[0].src = "images/heart.png";
+                    removeFavJoke(this.props.joke);
+                }
             }
-        }
+        } else
+            removeFavJoke(this.props.joke);
     }
 
     render() {
         return (
             <div className={ this.props.fav ? "favJokeDetails" : "jokeDetails" }>
                 <div className="favBtn" onClick={this.like}>
-                    <img src={ this.props.fav ? "images/full-heart.png" : "images/heart.png"} atl="heart" />
+                    <img src={ (this.props.fav || this.state.isFavourite)
+                        ? "images/full-heart.png"
+                        : "images/heart.png"
+                    } alt="heart" />
                 </div>
                 <div className={ this.props.fav ? "icon favIcon" : "icon" }>
                 <img src="images/Vector.png" className="jokeIcon" alt="Icon" />
@@ -59,6 +62,46 @@ class Joke extends React.Component {
 
 }
 
+function addFavJoke(joke) {
+    let allFavJokes = JSON.parse(localStorage.getItem("favJokes"));
+    allFavJokes.push(joke);
+    localStorage.setItem("favJokes", JSON.stringify(allFavJokes));
+
+    let containerF = document.createElement("div");
+    containerF.id = "fav-" + joke.id;
+    let parentF = document.getElementById("favJokes");
+    parentF.insertBefore(containerF, parentF.childNodes[0]);
+    showFavJoke(joke);
+}
+
+function removeFavJoke(joke) {
+    let allFavJokes = JSON.parse(localStorage.getItem("favJokes"));
+
+    let newList = [];
+    for(let i = 0; i<allFavJokes.length; i++){
+        if(allFavJokes[i].id != joke.id)
+            newList.push(allFavJokes[i]);
+    }
+    localStorage.setItem("favJokes", JSON.stringify(newList));
+    document.getElementById("fav-" + joke.id).remove();
+}
+
+function showFavJokes(){
+    let favJokes = JSON.parse(localStorage.getItem("favJokes"));
+    console.log(favJokes);
+    if(favJokes === null){
+        localStorage.setItem("favJokes", JSON.stringify([]));
+    } else {
+        for(let i=0; i<favJokes.length; i++) {
+            let containerF = document.createElement("div");
+            containerF.id = "fav-" + favJokes[i].id;
+            let parentF = document.getElementById("favJokes");
+            parentF.insertBefore(containerF, parentF.childNodes[0]);
+            showFavJoke(favJokes[i]);
+        }
+    }
+}
+
 function showJoke(j){
     ReactDOM.render(<Joke joke = {j} fav = {false}/>,
     document.getElementById(j.id));
@@ -68,3 +111,6 @@ function showFavJoke(j){
     ReactDOM.render(<Joke joke = {j} fav = {true}/>,
         document.getElementById("fav-"+j.id));
 }
+
+
+showFavJokes();

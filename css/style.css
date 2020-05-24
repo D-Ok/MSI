@@ -2,12 +2,13 @@ body, p, div{
     margin: 0;
 }
 
-body{
-    background: #F8F8F8;
-}
-
 #jokes{
     margin: 40px 0;
+}
+
+.content{
+    position: relative;
+    z-index: 5;
 }
 
 .mainBlock{
@@ -16,15 +17,130 @@ body{
     float: left;
     width: 46%;
     min-height: 100vh;
-    background: #FFFFFF;
+}
+
+.showFavBtn{
+    position: absolute;
+    visibility: hidden;
+}
+
+.showFavIcon{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+    background: #333333;
 }
 
 .favBlock {
     padding: 40px;
+    background: #F8F8F8;
     display: inline-block;
     float: left;
     width: calc(34% - 80px);
+    min-height: 100vh ;
 }
+
+@media screen and (max-width: 900px){
+
+    .showFavBtn{
+        position: absolute;
+        visibility: visible;
+        top: 40px;
+        right: 40px;
+    }
+
+    .favBlock{
+        display: none;
+    }
+
+    .mainBlock{
+        padding: 0 40px;
+        width: calc(100% - 80px);
+    }
+
+    .favName{
+        position: relative;
+        top: -4px;
+    }
+
+    .hide{
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 600px){
+
+    body{
+        overflow-x: hidden;
+    }
+
+    .emptyBlock{
+        display: none;
+    }
+
+    .showFavBtn{
+        top: 20px;
+        right: 20px;
+    }
+
+    .mainBlock{
+        padding: 0 20px;
+        width: calc(100% - 40px);
+    }
+
+    .miniFavBlock{
+        display: block;
+        padding: 20px;
+        width: calc(100% - 40px);
+        padding-top: 88px !important;
+    }
+
+    .name {
+        margin-top: 20px !important;
+    }
+
+}
+
+.emptyBlock{
+    z-index: 0;
+    background: #FFFFFF;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+
+    .content{
+      z-index: 0;
+    }
+
+    .miniFavBlock {
+        right: 0;
+        top: 0;
+        display: block;
+        float: right;
+        width: calc(57% - 80px);
+        background: #F8F8F8;
+        padding-top: 88px;
+    }
+
+    .minMain {
+        display: block !important;
+        overflow: hidden;
+        width: 23%;
+        pointer-events: none;
+    }
+
+    .grey{
+        z-index: 10;
+        background: rgba( 0, 0, 0, 0.3);
+        width: 43%;
+    }
+}
+
 
 .favName {
     font-family: Roboto;
@@ -183,12 +299,11 @@ body{
 
 }
 
-.jokeCategory{
+.jokeCategory {
 
     padding: 6px 20px;
-    float: right;
-    display: inline-block;
     margin-top: 23px;
+    width: max-content;
 
     font-family: Roboto;
     font-style: normal;
@@ -204,6 +319,14 @@ body{
 
     background: #FFFFFF;
     border-radius: 6px;
+}
+
+@media screen and (min-width: 1180px) {
+
+    .jokeCategory {
+        display: inline-block;
+        float: right;
+    }
 }
 
 .jokeTime{

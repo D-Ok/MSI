@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <script type="text/babel" src="js/joke.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/main.js" defer></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
@@ -13,11 +13,17 @@
     <title>MSI 2020</title>
 </head>
 <body>
+<div class="emptyBlock"></div>
 <div class="content">
+    <div class="showFavBtn" onclick="displayFavourite()">
+        <div class="showFavIcon"></div>
+        <label class="favName">Favourite</label>
+    </div>
     <div class="mainBlock">
         <div class="filtersBlock">
 
             <div class="name">MSI 2020</div>
+
             <p class="mainHeaderText">Hey!</p>
             <p class="headerText">Let`s try to find a joke for you:</p>
 

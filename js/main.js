@@ -122,10 +122,26 @@ function selectMode(el){
     }
 }
 
+function displayFavourite(){
+    let block = document.getElementsByClassName("favBlock")[0];
+    if(block.classList.contains("miniFavBlock")){
+        block.classList.remove("miniFavBlock");
+        document.getElementsByClassName("emptyBlock")[0].classList.remove("grey");
+        document.getElementsByClassName("mainBlock")[0].classList.remove("minMain");
+        block.getElementsByClassName("favName")[0].classList.remove("hide");
+        document.getElementsByClassName("mainBlock")[0].classList.remove("hide");
+
+    } else {
+        block.classList.add("miniFavBlock");
+        document.getElementsByClassName("emptyBlock")[0].classList.add("grey")
+        document.getElementsByClassName("mainBlock")[0].classList.add("minMain");
+        block.getElementsByClassName("favName")[0].classList.add("hide");
+        document.getElementsByClassName("mainBlock")[0].classList.add("hide");
+    }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     getCategories();
-    document.getElementById("random").se
 }, false);
 
 
