@@ -1,30 +1,39 @@
 let xhr = new XMLHttpRequest();
+
+//API link
 let link = 'https://api.chucknorris.io/jokes/';
 
+
+//"Get joke" button handler
+//get jokes from api
 function getJoke(){
     let url = link;
     if(document.getElementById("random").checked) {
         url += "random";
         getJokeFromAPI(url);
+
     } else if(document.getElementById("category").checked) {
         let selectedCategory = document.getElementsByClassName("selectedBox");
+
         if(selectedCategory.length>0) {
             url += "random?category=" + selectedCategory[0].innerHTML;
             getJokeFromAPI(url);
         } else
-            alert("Please, choose the category first");
+            alert("Please, choose the category first.");
+
     } else {
         let text = document.getElementById("searchInput").value;
+
         if(text.length<3 || text.length>120)
-            alert("Length of text for searching must be between 3 and 120.");
+            alert("Text for searching must contains from 3 to 120 characters.");
         else {
             url += 'search?query=' + text;
             getJokes(url);
         }
     }
-
 }
 
+//get jokes from API and display them
 function getJokes(url) {
     xhr.open('GET', url, false);
     xhr.send();
@@ -47,6 +56,7 @@ function getJokes(url) {
     }
 }
 
+//get a joke from API and display them
 function getJokeFromAPI(url) {
     xhr.open('GET', url, false);
     xhr.send();
@@ -66,6 +76,7 @@ function getJokeFromAPI(url) {
     }
 }
 
+// get all available categories from API
 function getCategories(){
 
     xhr.open('GET', link+'categories', false);
@@ -82,6 +93,7 @@ function getCategories(){
     }
 }
 
+// display category
 function addCategory(c){
     let box = document.createElement("div");
     box.classList.add("categoryBox");
@@ -91,6 +103,7 @@ function addCategory(c){
     document.getElementById("categories").appendChild(box);
 }
 
+// change style of selected category
 function selectCategory(el){
     let attr = "selectedBox";
 
@@ -104,6 +117,7 @@ function selectCategory(el){
     }
 }
 
+// select mode for getting jokes from API
 function selectMode(el){
     let categoryEl = document.getElementById("categories");
     let searchEl = document.getElementById("searchDiv");
@@ -122,6 +136,8 @@ function selectMode(el){
     }
 }
 
+//"Favourite" button handler
+//show (or hide) block with favourite jokes (available in table and mobile mode)
 function displayFavourite(){
     let block = document.getElementsByClassName("favBlock")[0];
     let lines = document.getElementsByClassName("showFavIcon")[0].getElementsByClassName("line");

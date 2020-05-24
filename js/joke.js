@@ -8,6 +8,7 @@ class Joke extends React.Component {
         this.like = this.like.bind(this);
     }
 
+    //addition and removing favourite jokes
     like() {
         let jokeId = this.props.joke.id;
         let jokeEl = document.getElementById(jokeId);
@@ -52,7 +53,7 @@ class Joke extends React.Component {
                 </div>
                 <p className="jokeID">ID: <a href={this.props.joke.url}>{this.props.joke.id}</a></p>
                 <div className="text">{this.props.joke.value}</div>
-                <p className="jokeTime">{this.props.joke.updated_at}</p>
+                <p className="jokeTime">{this.props.time}</p>
                 { this.props.joke.categories.length>0
                     ? this.props.fav
                         ? this.props.joke.categories.map(function(cat, i){
@@ -67,6 +68,28 @@ class Joke extends React.Component {
 
 }
 
+//display joke
+function showJoke(j){
+    let timeString = changeTimeValue(j);
+    ReactDOM.render(<Joke joke = {j} fav = {false} time = {timeString}/>, document.getElementById(j.id));
+}
+
+// display joke as favourite
+function showFavJoke(j){
+    let timeString = changeTimeValue(j);
+    ReactDOM.render(<Joke joke = {j} fav = {true} time = {timeString}/>, document.getElementById("fav-"+j.id));
+}
+
+// Calculate time from updated till now.
+// Return string for displaying
+function changeTimeValue(j){
+    let current = new Date();
+    let update = new Date(Date.parse(j.updated_at));
+    let timeDiff = Math.floor((current - update) / (1000*60*60));
+    return "Last update: "+timeDiff+" hours ago";
+}
+
+// save joke in browser and display it as favourite
 function addFavJoke(joke) {
     let allFavJokes = JSON.parse(localStorage.getItem("favJokes"));
     allFavJokes.push(joke);
@@ -79,6 +102,7 @@ function addFavJoke(joke) {
     showFavJoke(joke);
 }
 
+// remove favourite joke from browser and from screen
 function removeFavJoke(joke) {
     let allFavJokes = JSON.parse(localStorage.getItem("favJokes"));
 
@@ -91,6 +115,7 @@ function removeFavJoke(joke) {
     document.getElementById("fav-" + joke.id).remove();
 }
 
+// Display jokes stored in the browser
 function showFavJokes(){
     let favJokes = JSON.parse(localStorage.getItem("favJokes"));
     console.log(favJokes);
@@ -105,24 +130,6 @@ function showFavJokes(){
             showFavJoke(favJokes[i]);
         }
     }
-}
-
-function showJoke(j){
-    changeTimeValue(j);
-    ReactDOM.render(<Joke joke = {j} fav = {false}/>, document.getElementById(j.id));
-}
-
-function showFavJoke(j){
-    changeTimeValue(j);
-    ReactDOM.render(<Joke joke = {j} fav = {true}/>, document.getElementById("fav-"+j.id));
-}
-
-function changeTimeValue(j){
-    let current = new Date();
-    let update = new Date(Date.parse(j.updated_at));
-    let timeDiff = Math.floor((current - update) / (1000*60*60));
-    j.updated_at = "Last update: "+timeDiff+" hours ago";
-
 }
 
 showFavJokes();
