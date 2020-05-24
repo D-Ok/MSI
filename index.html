@@ -13,8 +13,9 @@
     <title>MSI 2020</title>
 </head>
 <body>
-<div class="emptyBlock"></div>
 <div class="content">
+    <div class="emptyBlock"> </div>
+
     <div class="showFavBtn" onclick="displayFavourite()">
         <div class="showFavIcon">
             <div class="line"></div>
@@ -22,6 +23,7 @@
         </div>
         <div class="favName">Favourite</div>
     </div>
+
     <div class="mainBlock">
         <div class="filtersBlock">
 
@@ -44,16 +46,16 @@
             <div id="searchDiv" hidden>
             <textarea id="searchInput" placeholder="Free text search..."></textarea>
             </div>
+
             <div class = "btn" onclick="getJoke()" ><p class="btnText">Get a joke</p></div>
         </div>
-        <div id="jokes">
-        </div>
+
+        <div id="jokes"></div>
     </div>
+
     <div class="favBlock">
         <label class="favName">Favourite</label>
-        <div id="favJokes">
-
-        </div>
+        <div id="favJokes"></div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
