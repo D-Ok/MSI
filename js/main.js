@@ -124,16 +124,23 @@ function selectMode(el){
 
 function displayFavourite(){
     let block = document.getElementsByClassName("favBlock")[0];
+    let lines = document.getElementsByClassName("showFavIcon")[0].getElementsByClassName("line");
     if(block.classList.contains("miniFavBlock")){
+        lines[0].classList.remove("backslashLine");
+        lines[1].classList.remove("slashLine");
+
         block.classList.remove("miniFavBlock");
-        document.getElementsByClassName("emptyBlock")[0].classList.remove("grey");
+        document.getElementsByClassName("emptyBlock")[0].classList.remove("greyBlock");
         document.getElementsByClassName("mainBlock")[0].classList.remove("minMain");
         block.getElementsByClassName("favName")[0].classList.remove("hide");
         document.getElementsByClassName("mainBlock")[0].classList.remove("hide");
 
     } else {
+        lines[0].classList.add("backslashLine");
+        lines[1].classList.add("slashLine");
+
         block.classList.add("miniFavBlock");
-        document.getElementsByClassName("emptyBlock")[0].classList.add("grey")
+        document.getElementsByClassName("emptyBlock")[0].classList.add("greyBlock")
         document.getElementsByClassName("mainBlock")[0].classList.add("minMain");
         block.getElementsByClassName("favName")[0].classList.add("hide");
         document.getElementsByClassName("mainBlock")[0].classList.add("hide");

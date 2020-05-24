@@ -20,17 +20,58 @@ body, p, div{
 }
 
 .showFavBtn{
+    z-index: 20;
     position: absolute;
     visibility: hidden;
+    cursor: pointer;
+    width: max-content;
+}
+
+.showFavBtn:hover .favName{
+    color: black;
 }
 
 .showFavIcon{
+    position: absolute;
+    left: -38px;
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    margin-right: 10px;
     display: inline-block;
     background: #333333;
+}
+
+.line{
+    position: absolute;
+    top: 10px;
+    left: 7px;
+    width: 14px;
+    height: 2px;
+
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+
+.secondLine{
+    top: 16px;
+    height: 1.8px;
+}
+
+
+.slashLine{
+    top: 13px;
+    left: 6.5px;
+    transform: matrix(0.71, -0.71, 0.71, 0.71, 0, 0);
+    width: 14.85px;
+    height: 2.12px;
+}
+
+.backslashLine{
+    top: 13px;
+    left: 6.5px;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    width: 14.85px;
+    height: 2.12px;
 }
 
 .favBlock {
@@ -39,7 +80,12 @@ body, p, div{
     display: inline-block;
     float: left;
     width: calc(34% - 80px);
-    min-height: 100vh ;
+    min-height: calc(100vh - 80px);
+    height: inherit;
+}
+
+#favJokes{
+    margin-top: 48px;
 }
 
 @media screen and (max-width: 900px){
@@ -60,24 +106,17 @@ body, p, div{
         width: calc(100% - 80px);
     }
 
-    .favName{
-        position: relative;
-        top: -4px;
-    }
-
     .hide{
         display: none !important;
     }
 }
 
+
+
 @media screen and (max-width: 600px){
 
     body{
         overflow-x: hidden;
-    }
-
-    .emptyBlock{
-        display: none;
     }
 
     .showFavBtn{
@@ -94,7 +133,6 @@ body, p, div{
         display: block;
         padding: 20px;
         width: calc(100% - 40px);
-        padding-top: 88px !important;
     }
 
     .name {
@@ -120,21 +158,22 @@ body, p, div{
     .miniFavBlock {
         right: 0;
         top: 0;
+        position: absolute;
+        z-index: 5;
         display: block;
         float: right;
         width: calc(57% - 80px);
         background: #F8F8F8;
-        padding-top: 88px;
     }
 
     .minMain {
         display: block !important;
         overflow: hidden;
-        width: 23%;
+        width: calc(100% - 80px);
         pointer-events: none;
     }
 
-    .grey{
+    .greyBlock{
         z-index: 10;
         background: rgba( 0, 0, 0, 0.3);
         width: 43%;
@@ -143,11 +182,14 @@ body, p, div{
 
 
 .favName {
+    display: inline-block;
+    float: left;
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 28px;
+    margin-bottom: 10px;
 
     color: #ABABAB;
 }
@@ -207,6 +249,16 @@ body, p, div{
 
     text-align: center;
     color: #FFFFFF;
+
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: #7291FF;
+}
+
+.btn:active{
+    background: #8EA7FF;
 }
 
 .btnText{
@@ -254,6 +306,7 @@ body, p, div{
 
 .icon{
     position: absolute;
+    z-index: 20;
     top: 67px;
     left: 40px;
 
@@ -264,6 +317,20 @@ body, p, div{
     text-align: center;
 
     background: #FFFFFF;
+}
+
+.grey{
+  background: #F8F8F8 !important;
+}
+
+.mLine{
+    z-index: 30;
+    position: absolute;
+    left: 15.35px;
+    height: 1px;
+    width: 10px;
+
+    background: #ABABAB;
 }
 
 .favIcon {
@@ -301,6 +368,8 @@ body, p, div{
 
 .jokeCategory {
 
+    display: inline-block;
+    float: right;
     padding: 6px 20px;
     margin-top: 23px;
     width: max-content;
@@ -319,15 +388,36 @@ body, p, div{
 
     background: #FFFFFF;
     border-radius: 6px;
+    cursor: default;
 }
 
-@media screen and (min-width: 1180px) {
+@media screen and (max-width: 450px) {
 
     .jokeCategory {
-        display: inline-block;
-        float: right;
+        display: initial;
+        float: none;
+        margin: 10px 0;
+    }
+
+    .jokeDetails{
+        padding-bottom: 20px !important;
     }
 }
+
+
+@media screen and (max-width: 1180px) {
+
+    .favJokeDetails .jokeCategory {
+        display: initial;
+        float: none;
+        margin: 10px 0;
+    }
+
+    .favJokeDetails{
+        padding-bottom: 20px !important;
+    }
+}
+
 
 .jokeTime{
 
@@ -346,12 +436,12 @@ body, p, div{
 }
 
 .favBtn{
-
+    cursor: pointer;
     float: right;
     width: 20px;
     height: 20px;
-
 }
+
 
 #categories{
     margin: 20px 0;
@@ -385,6 +475,12 @@ body, p, div{
     text-transform: uppercase;
 
     color: #ABABAB;
+    cursor: pointer;
+}
+
+.categoryBox:hover{
+    color: #333333;
+    border-color: #333333;
 }
 
 .radioB{

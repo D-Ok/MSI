@@ -45,15 +45,20 @@ class Joke extends React.Component {
                     } alt="heart" />
                 </div>
                 <div className={ this.props.fav ? "icon favIcon" : "icon" }>
-                <img src="images/Vector.png" className="jokeIcon" alt="Icon" />
+                    <img src="images/Vector.png" className="jokeIcon" alt="Icon" />
+                    <div className="mLine" style={{top: 15+'px'}}></div>
+                    <div className="mLine" style={{top: 17.5+'px'}}></div>
+                    <div className="mLine" style={{top: 20+'px'}}></div>
                 </div>
                 <p className="jokeID">ID: <a href={this.props.joke.url}>{this.props.joke.id}</a></p>
                 <div className="text">{this.props.joke.value}</div>
                 <p className="jokeTime">{this.props.joke.updated_at}</p>
                 { this.props.joke.categories.length>0
-                    ? this.props.joke.categories.map(function(cat, i){
-                        return <div className="jokeCategory">{cat}</div>;
-                      })
+                    ? this.props.fav
+                        ? this.props.joke.categories.map(function(cat, i){
+                          return <div className="jokeCategory grey">{cat}</div>})
+                        : this.props.joke.categories.map(function(cat, i){
+                            return <div className="jokeCategory">{cat}</div>})
                     : null
                 }
              </div>
@@ -103,14 +108,21 @@ function showFavJokes(){
 }
 
 function showJoke(j){
-    ReactDOM.render(<Joke joke = {j} fav = {false}/>,
-    document.getElementById(j.id));
+    changeTimeValue(j);
+    ReactDOM.render(<Joke joke = {j} fav = {false}/>, document.getElementById(j.id));
 }
 
 function showFavJoke(j){
-    ReactDOM.render(<Joke joke = {j} fav = {true}/>,
-        document.getElementById("fav-"+j.id));
+    changeTimeValue(j);
+    ReactDOM.render(<Joke joke = {j} fav = {true}/>, document.getElementById("fav-"+j.id));
 }
 
+function changeTimeValue(j){
+    let current = new Date();
+    let update = new Date(Date.parse(j.updated_at));
+    let timeDiff = Math.floor((current - update) / (1000*60*60));
+    j.updated_at = "Last update: "+timeDiff+" hours ago";
+
+}
 
 showFavJokes();
